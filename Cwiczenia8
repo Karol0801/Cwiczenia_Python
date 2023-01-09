@@ -1,0 +1,37 @@
+#### ZADADNIE 1 #### (dziedziczenie DNA z RNA)
+
+class RNA:
+    def __init__(self, ID, species, sequence):
+        self.id = ID
+        self.spec = species
+        self.seq = sequence
+
+    def get_complement(self):
+        return self.seq.replace('A', 'u').replace('C', 'g').replace('G', 'c').replace('U', 'a').upper()[::-1]
+
+    def __add__(self, other):
+        added_id = str(self.id) + "_" + str(other.id)
+        added_spec = self.spec + "," + other.spec
+        added_seq = self.seq + other.seq
+        return f"""
+                   ID: {added_id} 
+                   Species: {added_spec}
+                   Sequence: {added_seq}"""
+
+    def get_sequence_length(self):
+        return len(self.seq)
+
+    def __str__(self):
+        return "Object belongs to class 'RNA'"
+
+    def __repr__(self):
+        return f"RNA({self.id}, {self.spec}, {self.seq})"
+
+
+class DNA(RNA):
+    def __init__(self, ID, species, sequence):
+        super().__init__(self, ID, species)
+        self.seq = sequence.replace('U', 'T')
+
+    def get_complement(self):
+        return self.seq.replace('A', 't').replace('C', 'g').replace('G', 'c').replace('T', 'a').upper()[::-1]
